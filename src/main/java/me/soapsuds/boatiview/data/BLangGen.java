@@ -11,7 +11,7 @@ import net.minecraft.core.HolderLookup;
 public class BLangGen extends FabricLanguageProvider {
 
     public BLangGen(FabricDataOutput out) {
-        super(out, new CompletableFuture<>());
+        super(out, "en_us", new CompletableFuture<>());
     }
 
 	@Override
