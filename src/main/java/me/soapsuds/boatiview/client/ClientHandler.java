@@ -19,8 +19,8 @@ public class ClientHandler {
                 boolean showHandsMainHand = false;
                 boolean showHandsOffHand = false;
                 for (String entry : config.client.itemsToShowInMovingBoat) {
+					String namespace = entry.substring(0, entry.indexOf(':'));
                 	if(entry.endsWith("*")) { //Handle entire modids by using a wildcard character
-                		String namespace = entry.substring(0, entry.indexOf(':'));
                 	    ResourceLocation mainHandItemLoc = BuiltInRegistries.ITEM.getKey(itemstack.getItem());
                 	    ResourceLocation offHandItemLoc = BuiltInRegistries.ITEM.getKey(itemstack1.getItem());
                 	    if (mainHandItemLoc.getNamespace().equals(namespace))
@@ -29,7 +29,8 @@ public class ClientHandler {
                 	        showHandsOffHand = showHandItem(itemstack1, false);
                 	}
                 	else { //Otherwise, check by individual item IDs
-                	    Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(entry));
+						String path = entry.substring(entry.indexOf(':') + 1);
+                	    Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(namespace, path));
                         if (item != null) {
                             showHandsMainHand = showHandItem(itemstack, item, true);
                             showHandsOffHand = showHandItem(itemstack1, item, false);

@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -10,8 +10,8 @@ loom {
     }
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 archivesBaseName = project.jar_name + "-" + project.minecraft_version
 version = project.mod_version
@@ -51,7 +51,7 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modCompileOnly("com.terraformersmc:modmenu:${mod_menu_version}") {
+    modImplementation("com.terraformersmc:modmenu:${mod_menu_version}") {
         transitive(false)
     }
     //modRuntime("com.terraformersmc:modmenu:${mod_menu_version}") {
@@ -112,8 +112,8 @@ tasks.withType(JavaCompile).configureEach {
     // If Javadoc is generated, this must be specified in that task too.
     it.options.encoding = "UTF-8"
 
-    // Minecraft 1.18 upwards uses Java 17.
-    it.options.release = 17
+    // Minecraft 1.21 upwards uses Java 21.
+    it.options.release = 21
 }
 
 java {
